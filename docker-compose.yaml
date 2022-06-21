@@ -1,0 +1,28 @@
+services:
+  event:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "3000:8080"
+    links:
+      - database
+    env_file:
+      - .env
+  database:
+    # https://hub.docker.com/_/postgres?tab=tags
+    image: postgres:14.3-alpine
+    hostname: postgres
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      # TODO: Move the CREATE TABLE in Go
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "${DB_USERNAME}" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
