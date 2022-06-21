@@ -27,7 +27,7 @@ The last 3 lines of the ouput should look something like this:
 ```
 NAME                        COMMAND                  SERVICE             STATUS              PORTS
 event-management-event-1   "/event-management"     event               running             0.0.0.0:3000->8080/tcp
-event-management-db-1      "docker-entrypoint.s…"   db                  running (healthy)   0.0.0.0:5432->5432/tcp
+event-management-database-1      "docker-entrypoint.s…"   database                  running (healthy)   0.0.0.0:5432->5432/tcp
 ```
 
 ## Get the authorization string

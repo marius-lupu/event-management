@@ -2,7 +2,7 @@ SHELL=/bin/bash
 GO111MODULE=on
 BINARY_NAME=event-management
 ADDRESS=http://localhost:3000
-HEADERS=-H 'Content-Type: application/json' -H "Authorization: Basic YXVkaXQ6cGFzc3dvcmQ="
+HEADERS=-H 'Content-Type: application/json' -H "Authorization: Basic ZXZlbnQ6cGFzc3dvcmQ="
 CURL_COMMAND=curl $(HEADERS)
 RECORD_COMMAND=$(CURL_COMMAND) -X POST $(ADDRESS)/event --data-binary
 
@@ -49,7 +49,7 @@ start:
 	docker-compose up --build -d
 
 exec-db:
-	docker-compose exec db psql -U $(APP_USERNAME) -d $(DB_NAME)
+	docker-compose exec database psql -U $(APP_USERNAME) -d $(DB_NAME)
 
 stop:
 	docker-compose down -v
